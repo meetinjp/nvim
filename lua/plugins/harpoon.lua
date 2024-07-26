@@ -1,0 +1,84 @@
+return {
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = true,
+		keys = {
+			{
+				"<leader>a",
+				function()
+					require("harpoon"):list():add()
+				end,
+			},
+			{
+				"<C-e>",
+				function()
+					require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
+				end,
+			},
+
+			{
+				"<C-h>",
+				function()
+					require("harpoon"):list():select(1)
+				end,
+			},
+			{
+				"<C-t>",
+				function()
+					require("harpoon"):list():select(2)
+				end,
+			},
+			{
+				"<C-n>",
+				function()
+					require("harpoon"):list():select(3)
+				end,
+			},
+			{
+				"<C-s>",
+				function()
+					require("harpoon"):list():select(4)
+				end,
+			},
+			{
+				"<leader><C-h>",
+				function()
+					require("harpoon"):list():replace_at(1)
+				end,
+			},
+			{
+				"<leader><C-t>",
+				function()
+					require("harpoon"):list():replace_at(2)
+				end,
+			},
+			{
+				"<leader><C-n>",
+				function()
+					require("harpoon"):list():replace_at(3)
+				end,
+			},
+			{
+				"<leader><C-s>",
+				function()
+					require("harpoon"):list():replace_at(4)
+				end,
+			},
+
+			{
+				"<leader>bc",
+				function()
+					vim.cmd(":%bd|e#")
+				end,
+			},
+			{
+				"<leader>bl",
+				function()
+					vim.cmd(":buffers")
+				end,
+			},
+		},
+	},
+}
