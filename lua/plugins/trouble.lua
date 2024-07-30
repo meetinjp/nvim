@@ -6,7 +6,7 @@ return {
 			icons = false,
 		},
 		keys = {
-			{ "<leader>tt", vim.cmd.TroubleToggle },
+			{ "<leader>tt", "<cmd>TroubleToggle<cr>" },
 		},
 	},
 }

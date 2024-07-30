@@ -3,6 +3,7 @@ return {
 		"nvim-telescope/telescope.nvim",
 		branch = "0.1.x",
 		dependencies = { "nvim-lua/plenary.nvim" },
+		lazy = false,
 		opts = {
 			defaults = {
 				layout_config = {
@@ -50,67 +51,47 @@ return {
 		keys = {
 			{
 				"<C-f>",
-				function()
-					require("telescope.builtin").find_files()
-				end,
+				"<cmd>lua require('telescope.builtin').find_files()<cr>",
 			},
 			{
 				"<C-p>",
-				function()
-					require("telescope.builtin").git_files()
-				end,
+				"<cmd>lua require('telescope.builtin').git_files()<cr>",
 			},
 			{
 				"<C-g>",
-				function()
-					require("telescope.builtin").live_grep()
-				end,
+				"<cmd>lua require('telescope.builtin').live_grep()<cr>",
 			},
 			{
 				"<leader>sg",
-				function()
-					require("telescope.builtin").grep_string()
-				end,
+				"<cmd>lua require('telescope.builtin').grep_string()<cr>",
 			},
 
 			{
 				"<leader>ts",
-				function()
-					require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ") })
-				end,
+				"<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep > ') })<cr>",
 			},
 
 			{
 				"<leader>tr",
-				function()
-					require("telescope.builtin").resume()
-				end,
+				"<cmd>lua require('telescope.builtin').resume()<cr>",
 			},
 
 			{
 				"<leader>lef",
-				function()
-					require("telescope.builtin").lsp_references()
-				end,
+				"<cmd>lua require('telescope.builtin').lsp_references()<cr>",
 			},
 
 			{
 				"<leader>go",
-				function()
-					require("telescope.builtin").git_status()
-				end,
+				"<cmd>lua require('telescope.builtin').git_status()<cr>",
 			},
 			{
 				"<leader>gcc",
-				function()
-					require("telescope.builtin").git_commits()
-				end,
+				"<cmd>lua require('telescope.builtin').git_commits()<cr>",
 			},
 			{
 				"<leader>gcb",
-				function()
-					require("telescope.builtin").git_bcommits()
-				end,
+				"<cmd>lua require('telescope.builtin').git_bcommits()<cr>",
 			},
 		},
 	},

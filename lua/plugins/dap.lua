@@ -2,57 +2,40 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		keys = {
-			{ "<leader>bb", vim.cmd.BufferLineCyclePrev },
 			{
 				"<leader>db",
-				function()
-					require("dap").toggle_breakpoint()
-				end,
+				"<cmd>lua require('dap').toggle_breakpoint()<cr>",
 			},
-			{ "<leader>dxb", ":lua require('dap').toggle_breakpoint(\"\")<Left><Left>" },
+			{ "<leader>dxb", "<cmd>lua require('dap').toggle_breakpoint(\"\")<Left><Left>" },
 
 			{
 				"<leader>dc",
-				function()
-					require("dap").continue()
-				end,
+				"<cmd>lua require('dap').continue()<cr>",
 			},
 			{
 				"<leader>dg",
-				function()
-					require("dap").run_to_cursor()
-				end,
+				"<cmd>lua require('dap').run_to_cursor()<cr>",
 			},
 			{
 				"<leader>dt",
-				function()
-					require("dap").terminate()
-				end,
+				"<cmd>lua require('dap').terminate()<cr>",
 			},
 			{
 				"<leader>dr",
-				function()
-					require("dap").restart()
-				end,
+				"<cmd>lua require('dap').restart()<cr>",
 			},
 
 			{
 				"<leader>di",
-				function()
-					require("dap").step_into()
-				end,
+				"<cmd>lua require('dap').step_into()<cr>",
 			},
 			{
 				"<leader>do",
-				function()
-					require("dap").step_over()
-				end,
+				"<cmd>lua require('dap').step_over()<cr>",
 			},
 			{
 				"<leader>da",
-				function()
-					require("dap").step_out()
-				end,
+				"<cmd>lua require('dap').step_out()<cr>",
 			},
 		},
 	},

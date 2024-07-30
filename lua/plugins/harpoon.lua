@@ -7,77 +7,44 @@ return {
 		keys = {
 			{
 				"<leader>a",
-				function()
-					require("harpoon"):list():add()
-				end,
+				"<cmd>lua require('harpoon'):list():add()<cr>",
 			},
 			{
 				"<C-e>",
-				function()
-					require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
-				end,
+				"<cmd>lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<cr>",
 			},
 
 			{
 				"<C-h>",
-				function()
-					require("harpoon"):list():select(1)
-				end,
+				"<cmd>lua require('harpoon'):list():select(1)<cr>",
 			},
 			{
 				"<C-t>",
-				function()
-					require("harpoon"):list():select(2)
-				end,
+				"<cmd>lua require('harpoon'):list():select(2)<cr>",
 			},
 			{
 				"<C-n>",
-				function()
-					require("harpoon"):list():select(3)
-				end,
+				"<cmd>lua require('harpoon'):list():select(3)<cr>",
 			},
 			{
 				"<C-s>",
-				function()
-					require("harpoon"):list():select(4)
-				end,
+				"<cmd>lua require('harpoon'):list():select(4)<cr>",
 			},
 			{
 				"<leader><C-h>",
-				function()
-					require("harpoon"):list():replace_at(1)
-				end,
+				"<cmd>lua require('harpoon'):list():replace_at(1)<cr>",
 			},
 			{
 				"<leader><C-t>",
-				function()
-					require("harpoon"):list():replace_at(2)
-				end,
+				"<cmd>lua require('harpoon'):list():replace_at(2)<cr>",
 			},
 			{
 				"<leader><C-n>",
-				function()
-					require("harpoon"):list():replace_at(3)
-				end,
+				"<cmd>lua require('harpoon'):list():replace_at(3)<cr>",
 			},
 			{
 				"<leader><C-s>",
-				function()
-					require("harpoon"):list():replace_at(4)
-				end,
-			},
-
-			{
-				"<leader>bc",
-				function()
-					vim.cmd(":%bd|e#")
-				end,
-			},
-			{
-				"<leader>bl",
-				function()
-					vim.cmd(":buffers")
-				end,
+				"<cmd>lua require('harpoon'):list():replace_at(4)<cr>",
 			},
 		},
 	},

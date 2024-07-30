@@ -22,7 +22,7 @@ return {
 			},
 		},
 		keys = {
-			{ "<leader>tc", vim.cmd.CloakToggle },
+			{ "<leader>tc", "<cmd>CloakToggle<cr>" },
 		},
 	},
 }

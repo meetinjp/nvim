@@ -13,6 +13,7 @@ return {
 				typescript = prettier,
 				typescriptreact = prettier,
 				markdown = prettier,
+				yaml = prettier,
 				-- You can use a function here to determine the formatters dynamically
 				python = { "ruff" },
 				c = { "clang-format" },
