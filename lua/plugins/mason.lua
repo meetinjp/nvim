@@ -29,6 +29,7 @@ return {
 				"bash-language-server",
 				"taplo",
 				"codespell",
+				"csharp-language-server",
 			},
 		},
 	},

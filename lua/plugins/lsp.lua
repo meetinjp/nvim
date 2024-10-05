@@ -70,6 +70,30 @@ return {
 				capabilities = {
 					offsetEncoding = "utf-16",
 				},
+				cmd = { "clangd" },
+				filetypes = { "c", "cpp" },
+				init_options = {
+					fallbackFlags = {
+						["c"] = {
+							"-std=c11",
+							"-Wall",
+							"-Wextra",
+							"-Werror",
+						},
+						["cpp"] = {
+							"-ggdb",
+							"-pedantic-errors",
+							"-Wall",
+							"-Weffc++",
+							"-Wextra",
+							"-Wconversion",
+							"-Wsign-conversion",
+							"-Werror",
+							"-Wshadow",
+							"-std=c++23",
+						},
+					},
+				},
 			})
 			vim.diagnostic.config({
 				virtual_text = true,
