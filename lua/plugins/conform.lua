@@ -21,6 +21,7 @@ return {
 				sh = { "shfmt" },
 				zsh = { "shfmt" },
 				toml = { "taplo" },
+				cs = { "csharpier" },
 
 				-- Use the "*" filetype to run formatters on all filetypes.
 				["*"] = { "codespell" },

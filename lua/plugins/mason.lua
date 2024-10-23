@@ -30,6 +30,7 @@ return {
 				"taplo",
 				"codespell",
 				"csharp-language-server",
+				"csharpier",
 			},
 		},
 	},
