@@ -50,8 +50,6 @@ vim.keymap.set("n", "<leader>sw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left>
 
 vim.keymap.set("n", "<leader>xx", "<cmd>!chmod +x %<cr>", { silent = true })
 
-vim.keymap.set("n", "<leader><leader>", "<cmd>so<cr>")
-
 vim.keymap.set("n", "<leader>pwc", "<cmd>echo wordcount().words<cr>")
 
 vim.keymap.set("n", "<leader>bc", "<cmd>%bd|e#<cr>")

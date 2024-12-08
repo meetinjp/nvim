@@ -8,5 +8,6 @@ return {
 				replace_keycodes = false,
 			})
 		end,
+		lazy = false,
 	},
 }
