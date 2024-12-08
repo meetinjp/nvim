@@ -1,6 +1,7 @@
 return {
 	{
 		"nvim-tree/nvim-tree.lua",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		lazy = false,
 		opts = {
 			auto_reload_on_write = true,
@@ -66,7 +67,7 @@ return {
 					padding = " ",
 					symlink_arrow = " ➛ ",
 					show = {
-						file = false,
+						file = true,
 						folder = true,
 						folder_arrow = true,
 						git = true,

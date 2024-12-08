@@ -3,7 +3,7 @@ vim.opt.guicursor = ""
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
-local tab_width = 4
+local tab_width = 2
 
 vim.opt.tabstop = tab_width
 vim.opt.softtabstop = tab_width

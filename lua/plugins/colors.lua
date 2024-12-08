@@ -1,5 +1,5 @@
 function ColorMyPencils(color)
-	color = color or "tokyonight-storm"
+	color = color or "rose-pine"
 
 	vim.cmd.colorscheme(color)
 
@@ -105,7 +105,7 @@ return {
 				-- ---@param colors ColorScheme
 				-- on_highlights = function(highlights, colors) end,
 			})
-			-- ColorMyPencils("tokyonight")
+			-- ColorMyPencils("tokyonight-storm")
 		end,
 	},
 	{
