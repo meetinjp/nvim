@@ -26,6 +26,7 @@ return {
 				zsh = { "shfmt" },
 				toml = { "taplo" },
 				cs = { "csharpier" },
+				rust = { "rustfmt" },
 
 				-- Use the "*" filetype to run formatters on all filetypes.
 				["*"] = { "codespell" },
@@ -38,7 +39,12 @@ return {
 			-- This can also be a function that returns the table.
 			format_on_save = {
 				-- I recommend these options. See :help conform.format for details.
-				lsp_format = "fallback",
+				-- `"never"`    never use the LSP for formatting (default)
+				-- `"fallback"` LSP formatting is used when no other formatters are available
+				-- `"prefer"`   use only LSP formatting when available
+				-- `"first"`    LSP formatting is used when available and then other formatters
+				-- `"last"`     other formatters are used then LSP formatting when available
+				lsp_format = "first",
 				timeout_ms = 500,
 			},
 			-- If this is set, Conform will run the formatter asynchronously after save.
