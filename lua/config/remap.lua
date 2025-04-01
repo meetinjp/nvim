@@ -54,3 +54,16 @@ vim.keymap.set("n", "<leader>pwc", "<cmd>echo wordcount().words<cr>")
 
 vim.keymap.set("n", "<leader>bc", "<cmd>%bd|e#<cr>")
 vim.keymap.set("n", "<leader>bl", "<cmd>buffers<cr>")
+
+vim.keymap.set("n", "<leader>tm", function()
+	_G.is_copilot_enabled = true
+
+	vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+
+	if _G.is_copilot_enabled then
+		vim.cmd(":Copilot disable")
+	else
+		vim.cmd(":Copilot enable")
+	end
+	_G.is_copilot_enabled = not _G.is_copilot_enabled
+end)
