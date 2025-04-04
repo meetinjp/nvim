@@ -64,7 +64,7 @@ return {
 					StatusLine = { fg = "love", bg = "love", blend = 10 },
 				},
 			})
-			ColorMyPencils("rose-pine")
+			-- ColorMyPencils("rose-pine")
 		end,
 	},
 	{
@@ -136,7 +136,7 @@ return {
 				dim_inactive = false,
 				transparent_mode = false,
 			})
-			-- ColorMyPencils("gruvbox")
+			ColorMyPencils("gruvbox")
 		end,
 	},
 }
