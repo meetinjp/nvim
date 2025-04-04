@@ -41,5 +41,6 @@ vim.o.foldlevelstart = 99
 vim.filetype.add({
 	pattern = {
 		[".*/%.i3/config"] = "i3config",
+		[".*/%tofi/config"] = "conf",
 	},
 })
