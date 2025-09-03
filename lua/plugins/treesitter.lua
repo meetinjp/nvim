@@ -20,7 +20,7 @@ return {
 					-- Instead of true it can also be a list of languages
 					additional_vim_regex_highlighting = false,
 				},
-				ensure_installed = { "jsdoc" },
+				ensure_installed = { "jsdoc", "css", "scss" },
 			})
 		end,
 	},
@@ -28,7 +28,7 @@ return {
 		"nvim-treesitter/nvim-treesitter-context",
 		version = "release",
 		opts = {
-			enable = false, -- Enable this plugin (Can be enabled/disabled later via commands)
+			enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
 			max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
 			min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
 			line_numbers = true,
