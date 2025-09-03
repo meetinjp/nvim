@@ -17,6 +17,9 @@ return {
 				html = prettier,
 				json = prettier,
 				jsonc = prettier,
+				svelte = prettier,
+				css = prettier,
+				scss = prettier,
 				sql = { "sleek" },
 				-- You can use a function here to determine the formatters dynamically
 				python = { "ruff" },

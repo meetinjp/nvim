@@ -16,7 +16,7 @@ return {
 				"stylua",
 				"clangd",
 				"clang-format",
-				"rust-analyzer",
+				-- "rust-analyzer",
 				"typescript-language-server",
 				"prettierd",
 				"eslint-lsp",
