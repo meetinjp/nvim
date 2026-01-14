@@ -28,7 +28,6 @@ return {
 				"shfmt",
 				"bash-language-server",
 				"taplo",
-				"codespell",
 			},
 		},
 	},

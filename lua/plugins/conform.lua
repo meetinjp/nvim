@@ -20,6 +20,7 @@ return {
 				svelte = prettier,
 				css = prettier,
 				scss = prettier,
+				mdx = prettier,
 				sql = { "sleek" },
 				-- You can use a function here to determine the formatters dynamically
 				python = { "ruff" },
@@ -32,7 +33,7 @@ return {
 				rust = { "rustfmt" },
 
 				-- Use the "*" filetype to run formatters on all filetypes.
-				["*"] = { "codespell" },
+				-- ["*"] = { "codespell" },
 				-- Use the "_" filetype to run formatters on filetypes that don't
 				-- have other formatters configured.
 				["_"] = { "trim_whitespace" },
