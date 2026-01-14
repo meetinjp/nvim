@@ -8,4 +8,8 @@ return {
 	{ "theHamsta/nvim-dap-virtual-text", config = true },
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", config = true },
 	{ "windwp/nvim-ts-autotag", config = true },
+	{
+		"davidmh/mdx.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+	},
 }
