@@ -11,7 +11,7 @@ return {
 		},
 		config = function()
 			local lsp = require("lsp-zero")
-			local lspconfig = require("lspconfig")
+			-- local lspconfig = vim.lsp.config
 			local cmp = require("cmp")
 
 			lsp.preset({})
@@ -20,7 +20,7 @@ return {
 			end)
 
 			-- (Optional) Configure lua language server for neovim
-			lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+			-- lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
 			-- Fix Undefined global 'vim'
 			lsp.nvim_workspace()
@@ -58,15 +58,15 @@ return {
 				vim.keymap.set("n", "<leader>h", vim.lsp.buf.signature_help, opts)
 			end)
 			lsp.setup({})
-			lspconfig.jsonls.setup({
-				settings = {
-					json = {
-						schemas = require("schemastore").json.schemas(),
-						validate = { enable = true },
-					},
-				},
-			})
-			lspconfig.clangd.setup({
+			-- lspconfig.jsonls.setup({
+			-- 	settings = {
+			-- 		json = {
+			-- 			schemas = require("schemastore").json.schemas(),
+			-- 			validate = { enable = true },
+			-- 		},
+			-- 	},
+			-- })
+			vim.lsp.config["clangd"] = {
 				capabilities = {
 					offsetEncoding = "utf-16",
 				},
@@ -94,7 +94,7 @@ return {
 						},
 					},
 				},
-			})
+			}
 			vim.diagnostic.config({
 				virtual_text = true,
 			})
