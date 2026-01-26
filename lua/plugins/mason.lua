@@ -4,9 +4,12 @@ return {
 		config = true,
 	},
 	{
-		"williamboman/mason-lspconfig.nvim",
-		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
-		config = true,
+		"mason-org/mason-lspconfig.nvim",
+		opts = {},
+		dependencies = {
+			{ "mason-org/mason.nvim", opts = {} },
+			"neovim/nvim-lspconfig",
+		},
 	},
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
