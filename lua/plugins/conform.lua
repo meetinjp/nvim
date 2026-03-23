@@ -30,7 +30,7 @@ return {
 				zsh = { "shfmt" },
 				toml = { "taplo" },
 				cs = { "csharpier" },
-				rust = { "rustfmt" },
+				rust = { "rust_analyzer" },
 
 				-- Use the "*" filetype to run formatters on all filetypes.
 				-- ["*"] = { "codespell" },
