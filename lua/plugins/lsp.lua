@@ -1,75 +1,67 @@
 return {
 	{ "b0o/schemastore.nvim" },
+	{ "ray-x/lsp_signature.nvim", config = true },
 	{
-		"VonHeikemen/lsp-zero.nvim",
-		branch = "v2.x", -- TODO: v3.x
+		"neovim/nvim-lspconfig",
 		dependencies = {
-			{ "neovim/nvim-lspconfig" },
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "hrsh7th/nvim-cmp" },
-			{ "L3MON4D3/LuaSnip" },
+			"williamboman/mason-lspconfig.nvim",
+			"hrsh7th/cmp-nvim-lsp",
+			"b0o/schemastore.nvim",
 		},
 		config = function()
-			local lsp = require("lsp-zero")
-			-- local lspconfig = vim.lsp.config
-			local cmp = require("cmp")
+			local capabilities = vim.tbl_deep_extend(
+				"force",
+				vim.lsp.protocol.make_client_capabilities(),
+				require("cmp_nvim_lsp").default_capabilities()
+			)
 
-			lsp.preset({})
-			lsp.on_attach(function(_, bufnr)
-				lsp.default_keymaps({ buffer = bufnr })
-			end)
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("UserLspKeymaps", { clear = true }),
+				callback = function(ev)
+					local opts = { buffer = ev.buf, remap = false }
 
-			-- (Optional) Configure lua language server for neovim
-			-- lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-
-			-- Fix Undefined global 'vim'
-			lsp.nvim_workspace()
-
-			-- local cmp_select = { behavior = cmp.SelectBehavior.Select }
-			local cmp_mappings = lsp.defaults.cmp_mappings({
-				["<Enter>"] = cmp.mapping.confirm({ select = true }),
-				["<C-c>"] = cmp.mapping.complete(),
+					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+					vim.keymap.set("n", "<leader>lw", vim.lsp.buf.workspace_symbol, opts)
+					vim.keymap.set("n", "<leader>lf", vim.diagnostic.open_float, opts)
+					vim.keymap.set("n", "[d", function()
+						vim.diagnostic.jump({ count = -1, float = true })
+					end, opts)
+					vim.keymap.set("n", "]d", function()
+						vim.diagnostic.jump({ count = 1, float = true })
+					end, opts)
+					vim.keymap.set("n", "<leader>lc", vim.lsp.buf.code_action, opts)
+					vim.keymap.set("n", "<leader>lef", vim.lsp.buf.references, opts)
+					vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
+					vim.keymap.set("n", "<leader>h", vim.lsp.buf.signature_help, opts)
+				end,
 			})
 
-			lsp.setup_nvim_cmp({
-				mapping = cmp_mappings,
-			})
-			lsp.set_preferences({
-				suggest_lsp_servers = false,
-				sign_icons = {
-					error = "E",
-					warn = "W",
-					hint = "H",
-					info = "I",
+			vim.lsp.config("lua_ls", {
+				capabilities = capabilities,
+				settings = {
+					Lua = {
+						runtime = { version = "LuaJIT" },
+						diagnostics = { globals = { "vim" } },
+						workspace = {
+							library = vim.api.nvim_get_runtime_file("", true),
+							checkThirdParty = false,
+						},
+						format = {
+							enable = true,
+							defaultConfig = {
+								indent_style = "space",
+								indent_size = "2",
+							},
+						},
+					},
 				},
 			})
-			lsp.on_attach(function(_, bufnr)
-				local opts = { buffer = bufnr, remap = false }
 
-				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-				vim.keymap.set("n", "<leader>lw", vim.lsp.buf.workspace_symbol, opts)
-				vim.keymap.set("n", "<leader>lf", vim.diagnostic.open_float, opts)
-				vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
-				vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
-				vim.keymap.set("n", "<leader>lc", vim.lsp.buf.code_action, opts)
-				vim.keymap.set("n", "<leader>lef", vim.lsp.buf.references, opts)
-				vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
-				vim.keymap.set("n", "<leader>h", vim.lsp.buf.signature_help, opts)
-			end)
-			lsp.setup({})
-			-- lspconfig.jsonls.setup({
-			-- 	settings = {
-			-- 		json = {
-			-- 			schemas = require("schemastore").json.schemas(),
-			-- 			validate = { enable = true },
-			-- 		},
-			-- 	},
-			-- })
-			vim.lsp.config["clangd"] = {
-				capabilities = {
+			vim.lsp.config("clangd", {
+				capabilities = vim.tbl_deep_extend("force", capabilities, {
 					offsetEncoding = "utf-16",
-				},
+				}),
 				cmd = { "clangd" },
 				filetypes = { "c", "cpp" },
 				init_options = {
@@ -94,11 +86,59 @@ return {
 						},
 					},
 				},
-			}
+			})
+
+			vim.lsp.config("jsonls", {
+				capabilities = capabilities,
+				settings = {
+					json = {
+						schemas = require("schemastore").json.schemas(),
+						validate = { enable = true },
+					},
+				},
+			})
+
+			vim.lsp.config("tailwindcss", {
+				capabilities = capabilities,
+				filetypes = {
+					"html",
+					"css",
+					"scss",
+					"javascript",
+					"javascriptreact",
+					"typescript",
+					"typescriptreact",
+					"vue",
+					"svelte",
+					"heex",
+				},
+			})
+
+			for _, server in ipairs({ "rust_analyzer", "gopls", "vtsls" }) do
+				vim.lsp.config(server, { capabilities = capabilities })
+			end
+
+			vim.lsp.enable({
+				"lua_ls",
+				"clangd",
+				"jsonls",
+				"tailwindcss",
+				"rust_analyzer",
+				"gopls",
+				"vtsls",
+			})
+
 			vim.diagnostic.config({
 				virtual_text = true,
+				float = {
+					focusable = false,
+					style = "minimal",
+					border = "rounded",
+					source = "if_many",
+					header = "",
+					prefix = "",
+				},
 			})
 		end,
 	},
-	{ "ray-x/lsp_signature.nvim", config = true },
 }
