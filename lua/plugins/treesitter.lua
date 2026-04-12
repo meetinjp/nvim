@@ -1,46 +1,26 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		tag = "v0.10.0",
+		branch = "main",
 		build = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				-- Automatically install missing parsers when entering buffer
-				-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-				auto_install = true,
+		init = function()
+			local installed = require("nvim-treesitter.config").get_installed()
+			local want = { "lua", "typescript", "rust", "c" }
+			local to_install = vim.tbl_filter(function(p)
+				return not vim.tbl_contains(installed, p)
+			end, want)
 
-				-- Install parsers synchronously (only applied to `ensure_installed`)
-				sync_install = false,
+			if #to_install > 0 then
+				require("nvim-treesitter").install(to_install)
+			end
 
-				highlight = {
-					enable = true,
-
-					-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-					-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-					-- Using this option may slow down your editor, and you may see some duplicate highlights.
-					-- Instead of true it can also be a list of languages
-					additional_vim_regex_highlighting = false,
-				},
-				ensure_installed = { "jsdoc", "css", "scss" },
+			-- Enable highlighting + indentation per filetype
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function()
+					pcall(vim.treesitter.start)
+					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end,
 			})
 		end,
 	},
-	-- {
-	-- 	"nvim-treesitter/nvim-treesitter-context",
-	-- 	version = "release",
-	-- 	opts = {
-	-- 		enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-	-- 		max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-	-- 		min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-	-- 		line_numbers = true,
-	-- 		multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
-	-- 		trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-	-- 		mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
-	-- 		-- Separator between context and content. Should be a single character string, like '-'.
-	-- 		-- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-	-- 		separator = nil,
-	-- 		zindex = 20, -- The Z-index of the context window
-	-- 		on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
-	-- 	},
-	-- },
 }
