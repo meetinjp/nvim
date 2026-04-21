@@ -118,15 +118,26 @@ return {
 				vim.lsp.config(server, { capabilities = capabilities })
 			end
 
-			vim.lsp.enable({
-				"lua_ls",
-				"clangd",
-				"jsonls",
-				"tailwindcss",
-				"rust_analyzer",
-				"gopls",
-				"vtsls",
-			})
+			-- Only enable servers whose executable is actually on PATH. Mason puts
+			-- its installs on PATH during setup, so by the time lspconfig loads
+			-- we can check with vim.fn.executable. This avoids error spam when a
+			-- server isn't installed yet (e.g., first launch before Mason finishes).
+			local server_exe = {
+				lua_ls = "lua-language-server",
+				clangd = "clangd",
+				jsonls = "vscode-json-language-server",
+				tailwindcss = "tailwindcss-language-server",
+				rust_analyzer = "rust-analyzer",
+				gopls = "gopls",
+				vtsls = "vtsls",
+			}
+			local to_enable = {}
+			for server, exe in pairs(server_exe) do
+				if vim.fn.executable(exe) == 1 then
+					table.insert(to_enable, server)
+				end
+			end
+			vim.lsp.enable(to_enable)
 
 			vim.diagnostic.config({
 				virtual_text = true,
