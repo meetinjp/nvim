@@ -23,7 +23,6 @@ return {
 				"vtsls",
 				"prettierd",
 				"eslint-lsp",
-				"codelldb",
 				"json-lsp",
 				"css-lsp",
 				"shfmt",
