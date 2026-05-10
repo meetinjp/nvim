@@ -22,6 +22,7 @@ return {
 				"rust-analyzer",
 				"vtsls",
 				"prettierd",
+				"prettier",
 				"eslint-lsp",
 				"json-lsp",
 				"css-lsp",
